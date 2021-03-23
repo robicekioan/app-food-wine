@@ -11,7 +11,7 @@
         label="Starters"
         color="primary"
         size="20px"
-        :to="{ name: 'Food' }"
+        :to="{ name: 'Starters' }"
       />
       <br />
       <q-btn
@@ -59,34 +59,10 @@
         </q-list>
       </q-btn-dropdown>
       <br />
-      <div class="q-pa-md">
-        <q-fab
-          label="Desserts"
-          label-position="left"
-          color="primary"
-          icon="keyboard_arrow_down"
-          direction="down"
-          padding="md md"
-        >
-          <q-fab-action
-            color="grey"
-            @click="onClick"
-            icon="icecream"
-            label="Chocolate Fondant"
-          />
-          <q-fab-action
-            text-color="primary"
-            color="grey"
-            @click="onClick"
-            icon="icecream"
-            label="Porccini Eclair"
-          />
-        </q-fab>
-      </div>
     </div>
   </q-page>
 </template>
-å
+
 <script>
 export default {
   name: 'Food',
