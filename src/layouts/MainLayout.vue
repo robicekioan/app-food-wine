@@ -17,12 +17,7 @@
     </q-header>
 
     <q-page-container>
-      <q-input
-        v-model="search"
-        filled
-        type="search"
-        placeholder="Search for wine of food..."
-      >
+      <q-input filled type="search" placeholder="Search for wine of food...">
         <template v-slot:append>
           <q-icon name="search" />
         </template>
@@ -58,10 +53,12 @@
 
 <script>
 // import { useRoute } from 'vue-router';
+
 export default {
   setup() {
     // const router = useRoute();
   },
+
   methods: {
     back() {
       this.$router.go(-1);

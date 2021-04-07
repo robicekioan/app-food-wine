@@ -51,9 +51,14 @@ import { RouteRecordRaw } from 'vue-router';
 import MainLayout from 'layouts/MainLayout.vue';
 import Home from 'pages/Home.vue';
 import About from 'pages/About.vue';
+
 import Wines from 'pages/Wines.vue';
+
 import Food from 'pages/Food/Food.vue';
-import Starters from 'pages/Food/Starters.vue';
+import Starters from 'src/pages/Food/Starters.vue';
+import Mains from 'pages/Food/Mains.vue';
+import Desserts from 'src/pages/Food/Desserts.vue';
+
 import Cart from 'pages/Cart.vue';
 import Error404 from 'pages/Error404.vue';
 
@@ -85,6 +90,16 @@ const routes: RouteRecordRaw[] = [
         path: '/food/starters',
         component: Starters,
         name: 'Starters',
+      },
+      {
+        path: '/food/mains',
+        component: Mains,
+        name: 'Mains',
+      },
+      {
+        path: '/food/desserts',
+        component: Desserts,
+        name: 'Desserts',
       },
 
       {
