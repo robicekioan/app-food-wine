@@ -52,7 +52,8 @@ import MainLayout from 'layouts/MainLayout.vue';
 import Home from 'pages/Home.vue';
 import About from 'pages/About.vue';
 
-import Wines from 'pages/Wines.vue';
+import Wines from 'src/pages/Wines/Wines.vue';
+import WhiteWines from 'src/pages/Wines/WhiteWines.vue';
 
 import Food from 'pages/Food/Food.vue';
 import Starters from 'src/pages/Food/Starters.vue';
@@ -79,6 +80,11 @@ const routes: RouteRecordRaw[] = [
         path: '/wines',
         component: Wines,
         name: 'Wines',
+      },
+      {
+        path: '/wines/white',
+        component: WhiteWines,
+        name: 'WhiteWines',
       },
 
       {
