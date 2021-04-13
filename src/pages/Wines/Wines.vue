@@ -4,7 +4,7 @@
       <h4>Please select your wine.</h4>
     </div>
 
-    <div class="absolute-center q-gutter-lg">
+    <div class="column items-center q-gutter-sm q-pa-xl">
       <q-btn
         rounded
         label="Wine Wines"
@@ -17,7 +17,7 @@
         rounded
         label="Red Wines"
         color="primary"
-        :to="{ name: 'Mains' }"
+        :to="{ name: 'RedWines' }"
         size="20px"
       />
       <br />
@@ -26,7 +26,7 @@
         rounded
         label="Dessert Wines"
         color="primary"
-        :to="{ name: 'Desserts' }"
+        :to="{ name: 'DessertWines' }"
         size="20px"
       />
     </div>

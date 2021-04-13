@@ -4,7 +4,7 @@
       <h4>Please select your dish.</h4>
     </div>
 
-    <div class="absolute-center q-gutter-lg">
+    <div class="column items-center q-gutter-sm q-pa-xl">
       <q-btn
         rounded
         icon="breakfast_dining"

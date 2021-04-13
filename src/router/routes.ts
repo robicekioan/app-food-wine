@@ -54,11 +54,14 @@ import About from 'pages/About.vue';
 
 import Wines from 'src/pages/Wines/Wines.vue';
 import WhiteWines from 'src/pages/Wines/WhiteWines.vue';
+import RedWines from 'src/pages/Wines/RedWines.vue';
+import DessertWines from 'src/pages/Wines/DessertWines.vue';
 
 import Food from 'pages/Food/Food.vue';
 import Starters from 'src/pages/Food/Starters.vue';
 import Mains from 'pages/Food/Mains.vue';
 import Desserts from 'src/pages/Food/Desserts.vue';
+import FoodDetails from 'pages/Food/FoodDetails.vue';
 
 import Cart from 'pages/Cart.vue';
 import Error404 from 'pages/Error404.vue';
@@ -82,9 +85,19 @@ const routes: RouteRecordRaw[] = [
         name: 'Wines',
       },
       {
-        path: '/wines/white',
+        path: '/wines/whitewine',
         component: WhiteWines,
         name: 'WhiteWines',
+      },
+      {
+        path: '/wines/redwine',
+        component: RedWines,
+        name: 'RedWines',
+      },
+      {
+        path: '/wines/dessertwine',
+        component: DessertWines,
+        name: 'DessertWines',
       },
 
       {
@@ -112,6 +125,12 @@ const routes: RouteRecordRaw[] = [
         path: '/cart',
         component: Cart,
         name: 'Cart',
+      },
+      {
+        path: '/food/:id',
+        component: FoodDetails,
+        name: 'FoodDetails',
+        props: true,
       },
     ],
   },

@@ -3,10 +3,10 @@
     <div class="text-center">
       <h4>Please select your main course.</h4>
     </div>
-    <div v-if="food" class="q-gutter-xl column items-center">
+    <div v-if="food" class="column items-center">
       <div class="card" v-for="mains in food" :key="mains.id">
         <q-card class="my-card">
-          <q-img :src="mains.url">
+          <q-img class="img" :src="mains.url">
             <div class="absolute-bottom text-center">
               <div class="text-h6">{{ mains.name }}</div>
               <div class="text-subtitle1">{{ mains.price }} ,-</div>
@@ -73,10 +73,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.column {
+  padding-bottom: 50px;
+}
+
 .my-card {
   width: 350px;
+  height: 405px;
+  margin-bottom: 50px;
 }
-.column {
-  padding-bottom: 100px;
+.img {
+  width: 350px;
+  height: 350px;
+  object-fit: contain;
 }
 </style>

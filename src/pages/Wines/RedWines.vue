@@ -1,7 +1,7 @@
 <template>
   <q-page class="page">
     <div class="text-center">
-      <h4>Please select your white wine.</h4>
+      <h4>Please select your red wine.</h4>
     </div>
     <div v-if="wines" class="column items-center">
       <div class="card" v-for="wine in wines" :key="wine.id">
@@ -29,7 +29,7 @@
                 <q-list>
                   <q-item clickable v-close-popup @click="onItemClick">
                     <q-item-section>
-                      <q-item-label>Photos</q-item-label>
+                      <q-item-label>{{ wine.recomendedFoods }}</q-item-label>
                     </q-item-section>
                   </q-item>
                 </q-list>
@@ -48,24 +48,38 @@
 import db from '../../boot/firebase';
 
 export default {
-  name: 'WhiteWines',
+  name: 'RedWines',
   data() {
     return {
       wines: [],
+      recomendedFoods: [],
     };
   },
   mounted() {
     db.collection('wines')
-      .where('type', '==', 'whiteWine')
+      .where('type', '==', 'redWine')
       .get()
       .then((querySnapshot) => {
-        console.log(querySnapshot);
+        // console.log(querySnapshot);
         querySnapshot.forEach((doc) => {
-          let foodData = doc.data();
-          foodData.id = doc.id;
+          let wineData = doc.data();
+          wineData.id = doc.id;
           // doc.data() is never undefined for query doc snapshots
-          console.log(foodData);
-          this.wines.push(foodData);
+          // console.log(wineData);
+          db.collection('food_wine_paring')
+            .where('wine_id', '==', wineData.id)
+            .get()
+            .then((recoFood) => {
+              recoFood.forEach((ele) => {
+                // console.log(ele.data());
+                let food_wine_paring = ele.data();
+                // this.recomendedFoods.push(food_wine_paring.food_id);
+                wineData.recomendedFoods = food_wine_paring.food_id;
+              });
+            });
+
+          console.log(wineData);
+          this.wines.push(wineData);
         });
       })
       .catch((error) => {
@@ -91,5 +105,3 @@ export default {
   object-fit: contain;
 }
 </style>
-
-// class="q-gutter-xl column items-center"

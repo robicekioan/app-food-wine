@@ -1,7 +1,7 @@
 <template>
   <q-page class="page">
     <div class="text-center">
-      <h4>Please select your white wine.</h4>
+      <h4>Please select your red wine.</h4>
     </div>
     <div v-if="wines" class="column items-center">
       <div class="card" v-for="wine in wines" :key="wine.id">
@@ -48,7 +48,7 @@
 import db from '../../boot/firebase';
 
 export default {
-  name: 'WhiteWines',
+  name: 'DessertWines',
   data() {
     return {
       wines: [],
@@ -56,7 +56,7 @@ export default {
   },
   mounted() {
     db.collection('wines')
-      .where('type', '==', 'whiteWine')
+      .where('type', '==', 'dessertWine')
       .get()
       .then((querySnapshot) => {
         console.log(querySnapshot);

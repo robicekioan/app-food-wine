@@ -3,10 +3,10 @@
     <div class="text-center">
       <h4>Please select your starter.</h4>
     </div>
-    <div v-if="food" class="q-gutter-xl column items-center">
+    <div v-if="food" class="column items-center">
       <div class="card" v-for="starter in food" :key="starter.id">
         <q-card class="my-card">
-          <q-img :src="starter.url">
+          <q-img class="img" :src="starter.url">
             <div class="absolute-bottom text-center">
               <div class="text-h6">{{ starter.name }}</div>
               <div class="text-subtitle1">{{ starter.price }} ,-</div>
@@ -26,7 +26,7 @@
               flat
               color="primary"
               no-icon-animation="true"
-              ><q-item-label class="text-h6">{{ mains.desc }}</q-item-label>
+              ><q-item-label class="text-h6">{{ starter.desc }}</q-item-label>
             </q-btn-dropdown>
             <q-btn
               flat
@@ -73,10 +73,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.column {
+  padding-bottom: 50px;
+}
+
 .my-card {
   width: 350px;
+  height: 405px;
+  margin-bottom: 50px;
 }
-.column {
-  padding-bottom: 100px;
+.img {
+  width: 350px;
+  height: 350px;
+  object-fit: contain;
 }
 </style>
