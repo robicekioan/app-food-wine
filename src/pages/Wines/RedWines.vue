@@ -73,11 +73,18 @@ export default {
               recoFood.forEach((ele) => {
                 // console.log(ele.data());
                 let food_wine_paring = ele.data();
+
+                this.recomendedFoods.push(food_wine_paring.food_id);
                 // this.recomendedFoods.push(food_wine_paring.food_id);
-                wineData.recomendedFoods = food_wine_paring.food_id;
               });
             });
 
+          // const x = this.recomendedFoods.map((o) => ({ ...o }));
+          const x = JSON.parse(JSON.stringify(this.recomendedFoods));
+          console.log(this.recomendedFoods);
+          console.log(x);
+          wineData.recomendedFoods = x;
+          // this.recomendedFoods = [];
           console.log(wineData);
           this.wines.push(wineData);
         });

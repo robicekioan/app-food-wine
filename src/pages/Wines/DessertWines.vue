@@ -65,7 +65,7 @@ export default {
           foodData.id = doc.id;
           // doc.data() is never undefined for query doc snapshots
           console.log(foodData);
-          this.wines.push(foodData);
+          this.wines.push(foodData); //
         });
       })
       .catch((error) => {

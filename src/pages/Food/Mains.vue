@@ -6,12 +6,18 @@
     <div v-if="food" class="column items-center">
       <div class="card" v-for="mains in food" :key="mains.id">
         <q-card class="my-card">
-          <q-img class="img" :src="mains.url">
-            <div class="absolute-bottom text-center">
-              <div class="text-h6">{{ mains.name }}</div>
-              <div class="text-subtitle1">{{ mains.price }} ,-</div>
-            </div>
-          </q-img>
+          <div
+            v-ripple
+            @click="getId(mains.id)"
+            class="cursor-pointer relative-position hoverable"
+          >
+            <q-img class="img" :src="mains.url">
+              <div class="absolute-bottom text-center">
+                <div class="text-h6">{{ mains.name }}</div>
+                <div class="text-subtitle1">{{ mains.price }} ,-</div>
+              </div>
+            </q-img>
+          </div>
 
           <q-card-actions class="row justify-around">
             <q-btn
@@ -32,7 +38,7 @@
               flat
               color="primary"
               icon="add_shopping_cart"
-              :to="{ name: 'Cart' }"
+              :to="{ name: 'FoodDetails', params: { id: mains.id } }"
             ></q-btn>
           </q-card-actions>
         </q-card>
@@ -51,6 +57,12 @@ export default {
       food: [],
     };
   },
+  methods: {
+    getId(id) {
+      this.$router.push('/food/' + id);
+    },
+  },
+
   mounted() {
     db.collection('food')
       .where('type', '==', 'main')
@@ -87,4 +99,5 @@ export default {
   height: 350px;
   object-fit: contain;
 }
+// :to="{ name: 'FoodDetails', params: { id: mains.id } }"
 </style>
