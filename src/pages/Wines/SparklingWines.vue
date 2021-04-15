@@ -1,7 +1,7 @@
 <template>
   <q-page class="page">
     <div class="text-center">
-      <h4>Please select your red wine.</h4>
+      <h4>Please select your sparkling wine.</h4>
     </div>
     <div v-if="documents" class="column items-center">
       <div class="card" v-for="wine in documents" :key="wine.id">
@@ -29,7 +29,7 @@
                 <q-list>
                   <q-item clickable v-close-popup @click="onItemClick">
                     <q-item-section>
-                      <q-item-label>Photos</q-item-label>
+                      <q-item-label>{{ wine.paringF }}</q-item-label>
                     </q-item-section>
                   </q-item>
                 </q-list>
@@ -48,10 +48,10 @@
 import getCollection from '../../composables/getCollection';
 
 export default {
-  name: 'DessertWines',
+  name: 'SparklingWines',
 
   setup() {
-    const { documents } = getCollection('wines', 'dessertWine');
+    const { documents } = getCollection('wines', 'redWine');
 
     return { documents };
   },

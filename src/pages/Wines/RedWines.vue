@@ -3,8 +3,8 @@
     <div class="text-center">
       <h4>Please select your red wine.</h4>
     </div>
-    <div v-if="wines" class="column items-center">
-      <div class="card" v-for="wine in wines" :key="wine.id">
+    <div v-if="documents" class="column items-center">
+      <div class="card" v-for="wine in documents" :key="wine.id">
         <q-card class="my-card" flat bordered>
           <q-card-section horizontal>
             <q-card-section>
@@ -45,55 +45,54 @@
 </template>
 
 <script>
-import db from '../../boot/firebase';
+import getCollection from '../../composables/getCollection';
 
 export default {
   name: 'RedWines',
-  data() {
-    return {
-      wines: [],
-      recomendedFoods: [],
-    };
-  },
-  mounted() {
-    db.collection('wines')
-      .where('type', '==', 'redWine')
-      .get()
-      .then((querySnapshot) => {
-        // console.log(querySnapshot);
-        querySnapshot.forEach((doc) => {
-          let wineData = doc.data();
-          wineData.id = doc.id;
-          // doc.data() is never undefined for query doc snapshots
-          // console.log(wineData);
-          db.collection('food_wine_paring')
-            .where('wine_id', '==', wineData.id)
-            .get()
-            .then((recoFood) => {
-              recoFood.forEach((ele) => {
-                // console.log(ele.data());
-                let food_wine_paring = ele.data();
 
-                this.recomendedFoods.push(food_wine_paring.food_id);
-                // this.recomendedFoods.push(food_wine_paring.food_id);
-              });
-            });
+  setup() {
+    const { documents } = getCollection('wines', 'redWine');
 
-          // const x = this.recomendedFoods.map((o) => ({ ...o }));
-          const x = JSON.parse(JSON.stringify(this.recomendedFoods));
-          console.log(this.recomendedFoods);
-          console.log(x);
-          wineData.recomendedFoods = x;
-          // this.recomendedFoods = [];
-          console.log(wineData);
-          this.wines.push(wineData);
-        });
-      })
-      .catch((error) => {
-        console.log('Error getting documents: ', error);
-      });
+    return { documents };
   },
 };
+// mounted() {
+//   db.collection('wines')
+//     .where('type', '==', 'redWine')
+//     .get()
+//     .then((querySnapshot) => {
+// console.log(querySnapshot);
+// querySnapshot.forEach((doc) => {
+//   let wineData = doc.data();
+//   wineData.id = doc.id;
+// doc.data() is never undefined for query doc snapshots
+// console.log(wineData);
+// db.collection('food_wine_paring')
+//   .where('wine_id', '==', wineData.id)
+//   .get()
+//   .then((recoFood) => {
+//     recoFood.forEach((ele) => {
+//       // console.log(ele.data());
+//       let food_wine_paring = ele.data();
+
+//       this.recomendedFoods.push(food_wine_paring.food_id);
+//       // this.recomendedFoods.push(food_wine_paring.food_id);
+//     });
+//   });
+
+// // const x = this.recomendedFoods.map((o) => ({ ...o }));
+// const x = JSON.parse(JSON.stringify(this.recomendedFoods));
+// console.log(this.recomendedFoods);
+// console.log(x);
+// wineData.recomendedFoods = x;
+// // this.recomendedFoods = [];
+// console.log(wineData);
+// this.wines.push(wineData);
+//   });
+// })
+// .catch((error) => {
+//   console.log('Error getting documents: ', error);
+// });
 </script>
 
 <style lang="scss" scoped>

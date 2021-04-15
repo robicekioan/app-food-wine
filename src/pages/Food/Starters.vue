@@ -3,13 +3,13 @@
     <div class="text-center">
       <h4>Please select your starter.</h4>
     </div>
-    <div v-if="food" class="column items-center">
-      <div class="card" v-for="starter in food" :key="starter.id">
+    <div v-if="documents" class="column items-center">
+      <div class="card" v-for="food in documents" :key="food.id">
         <q-card class="my-card">
-          <q-img class="img" :src="starter.url">
+          <q-img class="img" :src="food.url">
             <div class="absolute-bottom text-center">
-              <div class="text-h6">{{ starter.name }}</div>
-              <div class="text-subtitle1">{{ starter.price }} ,-</div>
+              <div class="text-h6">{{ food.name }}</div>
+              <div class="text-subtitle1">{{ food.price }} ,-</div>
             </div>
           </q-img>
 
@@ -26,7 +26,7 @@
               flat
               color="primary"
               no-icon-animation="true"
-              ><q-item-label class="text-h6">{{ starter.desc }}</q-item-label>
+              ><q-item-label class="text-h6">{{ food.desc }}</q-item-label>
             </q-btn-dropdown>
             <q-btn
               flat
@@ -42,32 +42,15 @@
 </template>
 
 <script>
-import db from '../../boot/firebase';
+import getCollection from '../../composables/getCollection';
 
 export default {
   name: 'Starters',
-  data() {
-    return {
-      food: [],
-    };
-  },
-  mounted() {
-    db.collection('food')
-      .where('type', '==', 'starter')
-      .get()
-      .then((querySnapshot) => {
-        console.log(querySnapshot);
-        querySnapshot.forEach((doc) => {
-          let foodData = doc.data();
-          foodData.id = doc.id;
-          // doc.data() is never undefined for query doc snapshots
-          console.log(foodData);
-          this.food.push(foodData);
-        });
-      })
-      .catch((error) => {
-        console.log('Error getting documents: ', error);
-      });
+
+  setup() {
+    const { documents } = getCollection('food', 'starter');
+
+    return { documents };
   },
 };
 </script>

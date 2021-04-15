@@ -3,8 +3,8 @@
     <div class="text-center">
       <h4>Please select your white wine.</h4>
     </div>
-    <div v-if="wines" class="column items-center">
-      <div class="card" v-for="wine in wines" :key="wine.id">
+    <div v-if="documents" class="column items-center">
+      <div class="card" v-for="wine in documents" :key="wine.id">
         <q-card class="my-card" flat bordered>
           <q-card-section horizontal>
             <q-card-section>
@@ -45,32 +45,15 @@
 </template>
 
 <script>
-import db from '../../boot/firebase';
+import getCollection from '../../composables/getCollection';
 
 export default {
   name: 'WhiteWines',
-  data() {
-    return {
-      wines: [],
-    };
-  },
-  mounted() {
-    db.collection('wines')
-      .where('type', '==', 'whiteWine')
-      .get()
-      .then((querySnapshot) => {
-        console.log(querySnapshot);
-        querySnapshot.forEach((doc) => {
-          let foodData = doc.data();
-          foodData.id = doc.id;
-          // doc.data() is never undefined for query doc snapshots
-          console.log(foodData);
-          this.wines.push(foodData);
-        });
-      })
-      .catch((error) => {
-        console.log('Error getting documents: ', error);
-      });
+
+  setup() {
+    const { documents } = getCollection('wines', 'whiteWine');
+
+    return { documents };
   },
 };
 </script>

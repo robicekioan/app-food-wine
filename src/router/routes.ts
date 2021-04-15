@@ -56,6 +56,7 @@ import Wines from 'src/pages/Wines/Wines.vue';
 import WhiteWines from 'src/pages/Wines/WhiteWines.vue';
 import RedWines from 'src/pages/Wines/RedWines.vue';
 import DessertWines from 'src/pages/Wines/DessertWines.vue';
+import SparklingWines from 'src/pages/Wines/SparklingWines.vue';
 
 import Food from 'pages/Food/Food.vue';
 import Starters from 'src/pages/Food/Starters.vue';
@@ -98,6 +99,11 @@ const routes: RouteRecordRaw[] = [
         path: '/wines/dessertwine',
         component: DessertWines,
         name: 'DessertWines',
+      },
+      {
+        path: '/wines/sparklingwines',
+        component: SparklingWines,
+        name: 'SparklingWines',
       },
 
       {

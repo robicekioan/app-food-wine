@@ -3,18 +3,18 @@
     <div class="text-center">
       <h4>Please select your main course.</h4>
     </div>
-    <div v-if="food" class="column items-center">
-      <div class="card" v-for="mains in food" :key="mains.id">
+    <div v-if="documents" class="column items-center">
+      <div class="card" v-for="food in documents" :key="food.id">
         <q-card class="my-card">
           <div
             v-ripple
-            @click="getId(mains.id)"
+            @click="getId(food.id)"
             class="cursor-pointer relative-position hoverable"
           >
-            <q-img class="img" :src="mains.url">
+            <q-img class="img" :src="food.url">
               <div class="absolute-bottom text-center">
-                <div class="text-h6">{{ mains.name }}</div>
-                <div class="text-subtitle1">{{ mains.price }} ,-</div>
+                <div class="text-h6">{{ food.name }}</div>
+                <div class="text-subtitle1">{{ food.price }} ,-</div>
               </div>
             </q-img>
           </div>
@@ -32,13 +32,13 @@
               flat
               color="primary"
               no-icon-animation="true"
-              ><q-item-label class="text-h6">{{ mains.desc }}</q-item-label>
+              ><q-item-label class="text-h6">{{ food.desc }}</q-item-label>
             </q-btn-dropdown>
             <q-btn
               flat
               color="primary"
               icon="add_shopping_cart"
-              :to="{ name: 'FoodDetails', params: { id: mains.id } }"
+              :to="{ name: 'Cart' }"
             ></q-btn>
           </q-card-actions>
         </q-card>
@@ -48,38 +48,15 @@
 </template>
 
 <script>
-import db from '../../boot/firebase';
+import getCollection from '../../composables/getCollection';
 
 export default {
   name: 'Mains',
-  data() {
-    return {
-      food: [],
-    };
-  },
-  methods: {
-    getId(id) {
-      this.$router.push('/food/' + id);
-    },
-  },
 
-  mounted() {
-    db.collection('food')
-      .where('type', '==', 'main')
-      .get()
-      .then((querySnapshot) => {
-        console.log(querySnapshot);
-        querySnapshot.forEach((doc) => {
-          let foodData = doc.data();
-          foodData.id = doc.id;
-          // doc.data() is never undefined for query doc snapshots
-          console.log(foodData);
-          this.food.push(foodData);
-        });
-      })
-      .catch((error) => {
-        console.log('Error getting documents: ', error);
-      });
+  setup() {
+    const { documents } = getCollection('food', 'main');
+
+    return { documents };
   },
 };
 </script>

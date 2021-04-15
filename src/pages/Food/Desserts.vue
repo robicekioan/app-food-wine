@@ -1,15 +1,15 @@
 <template>
   <q-page class="page">
     <div class="text-center">
-      <h4>Please select your dessert.</h4>
+      <h4>Please select your food.</h4>
     </div>
-    <div v-if="food" class="column items-center">
-      <div class="card" v-for="dessert in food" :key="dessert.id">
+    <div v-if="documents" class="column items-center">
+      <div class="card" v-for="food in documents" :key="food.id">
         <q-card class="my-card">
-          <q-img class="img" :src="dessert.url">
+          <q-img class="img" :src="food.url">
             <div class="absolute-bottom text-center">
-              <div class="text-h6">{{ dessert.name }}</div>
-              <div class="text-subtitle1">{{ dessert.price }} ,-</div>
+              <div class="text-h6">{{ food.name }}</div>
+              <div class="text-subtitle1">{{ food.price }} ,-</div>
             </div>
           </q-img>
 
@@ -26,7 +26,7 @@
               flat
               color="primary"
               no-icon-animation="true"
-              ><q-item-label class="text-h6">{{ dessert.desc }}</q-item-label>
+              ><q-item-label class="text-h6">{{ food.desc }}</q-item-label>
             </q-btn-dropdown>
             <q-btn
               flat
@@ -42,32 +42,15 @@
 </template>
 
 <script>
-import db from '../../boot/firebase';
+import getCollection from '../../composables/getCollection';
 
 export default {
-  name: 'Mains',
-  data() {
-    return {
-      food: [],
-    };
-  },
-  mounted() {
-    db.collection('food')
-      .where('type', '==', 'dessert')
-      .get()
-      .then((querySnapshot) => {
-        console.log(querySnapshot);
-        querySnapshot.forEach((doc) => {
-          let foodData = doc.data();
-          foodData.id = doc.id;
-          // doc.data() is never undefined for query doc snapshots
-          console.log(foodData);
-          this.food.push(foodData);
-        });
-      })
-      .catch((error) => {
-        console.log('Error getting documents: ', error);
-      });
+  name: 'Desserts',
+
+  setup() {
+    const { documents } = getCollection('food', 'dessert');
+
+    return { documents };
   },
 };
 </script>

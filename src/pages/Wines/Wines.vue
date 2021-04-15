@@ -7,6 +7,14 @@
     <div class="column items-center q-gutter-sm q-pa-xl">
       <q-btn
         rounded
+        label="Sparkling Wines"
+        color="primary"
+        size="20px"
+        :to="{ name: 'SparklingWines' }"
+      />
+      <br />
+      <q-btn
+        rounded
         label="Wine Wines"
         color="primary"
         size="20px"
