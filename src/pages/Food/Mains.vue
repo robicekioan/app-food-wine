@@ -48,6 +48,7 @@
 </template>
 
 <script>
+/* eslint-disable */
 import getCollection from '../../composables/getCollection';
 
 export default {
@@ -58,7 +59,13 @@ export default {
 
     return { documents };
   },
+  methods: {
+    getId(id) {
+      this.$router.push('/food/' + id);
+    },
+  },
 };
+/* eslint-enable  */
 </script>
 
 <style lang="scss" scoped>
@@ -76,5 +83,4 @@ export default {
   height: 350px;
   object-fit: contain;
 }
-// :to="{ name: 'FoodDetails', params: { id: mains.id } }"
 </style>

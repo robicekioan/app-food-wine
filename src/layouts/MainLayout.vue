@@ -64,6 +64,7 @@
 </template>
 
 <script>
+/* eslint-disable  */
 // import { useRoute } from 'vue-router';
 
 export default {
@@ -73,12 +74,13 @@ export default {
 
   methods: {
     back() {
-      // this.$router.go(-1);
+      this.$router.go(-1);
     },
     forward() {
-      // this.$router.go(+1);
+      this.$router.go(+1);
     },
   },
+  /* eslint-enable  */
 };
 </script>
 
